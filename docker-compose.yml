@@ -1,0 +1,38 @@
+version: '3.7'
+
+x-default-opts:
+  &default-opts
+  logging:
+    options:
+      max-size: "1m"
+
+services:
+  scanner:
+    <<: *default-opts
+    image: registry.undernet.antipathy.org/fingscanner:latest
+    networks:
+      - monitoring
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      SUBNET: ""
+      FILE_LOCATION: /var/log/fing.csv
+      DNS_SERVER: ""
+      LOG_SERVER: ""
+      INFLUX_SERVER: ""
+      INFLUX_TOKEN: ${INFLUX_TOKEN?Variable not set}
+      INFLUX_ORG: ${DOMAIN?Variable not set}
+      INFLUX_BUCKET: monitoring
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
+      placement:
+        constraints:
+          - node.labels.fing.fing-data == true
+
+networks:
+  monitoring:
+    external: true

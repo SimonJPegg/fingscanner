@@ -1,0 +1,7 @@
+schedule==1.1.0
+loguru==0.6.0
+pandas==1.4.2
+dnspython==2.2.1
+requests==2.27.1
+click==8.1.2
+influxdb-client==1.28.0
