@@ -1,6 +1,4 @@
 *
-.*
-!run.sh
 !conf/conf.properties
 !conf/discovery.properties
 !conf/ethernet-ouis.properties
@@ -9,5 +7,7 @@
 !conf/ip-services.properties
 !conf/kit.properties
 !conf/timezones.csv
-!requirements.txt
-!reporter.py
+!project/build.properties
+!project/plugins.sbt
+!src
+!build.sbt

@@ -1,1 +1,4 @@
 .idea
+scanner/project/target
+scanner/project/project/target
+scanner/target

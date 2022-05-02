@@ -16,14 +16,15 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     environment:
-      SUBNET: ""
-      FILE_LOCATION: /var/log/fing.csv
-      DNS_SERVER: ""
-      LOG_SERVER: ""
-      INFLUX_SERVER: ""
+      SUBNET: "192.168.0.1/24"
+      INFLUX_SERVER: "stats.${DOMAIN?Variable not set}"
       INFLUX_TOKEN: ${INFLUX_TOKEN?Variable not set}
       INFLUX_ORG: ${DOMAIN?Variable not set}
       INFLUX_BUCKET: monitoring
+      DNS_SERVER: "8.8.8.8"
+      LOG_SERVER: "logs.${DOMAIN?Variable not set}"
+      ACTOR_POOL: "10"
+      SCHEDULE: "10"
     deploy:
       resources:
         limits:
@@ -32,7 +33,6 @@ services:
       placement:
         constraints:
           - node.labels.fing.fing-data == true
-
 networks:
   monitoring:
     external: true
